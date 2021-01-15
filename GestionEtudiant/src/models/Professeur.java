@@ -15,6 +15,7 @@ import java.util.List;
 public class Professeur extends Personne {
     private String grade;
     private List<String> modules=new ArrayList();
+    private String matricule;
     
     public Professeur() {
         super();
@@ -52,6 +53,14 @@ public class Professeur extends Personne {
 
     public void setModules(List<String> modules) {
         this.modules = modules;
+    }
+
+    public String getMatricule() {
+        return matricule;
+    }
+
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
     }
 
    

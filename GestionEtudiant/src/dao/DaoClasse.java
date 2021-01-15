@@ -8,6 +8,8 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import models.Classe;
+import models.Details;
+import models.Professeur;
 
 /**
  *
@@ -23,6 +25,15 @@ public class DaoClasse {
         //insertion
         return nbreLigne;
     }
+    
+     public Details findModulesByClasse(String classe){
+        Details details =null;
+       //recherche
+       return details;
+   }
+    
+    
+    
     
     public List<Classe>findAll(){
         List<Classe>lClasses=new ArrayList<>();
