@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/model/Convert.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/dao/TestDao.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/VinscriptionController.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/vmenu.fxml</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/vinscription.fxml</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/ClasseController.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/vclasses.fxml</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/dao/DaoClasse.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/VmenuController.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/dao/DaoDetails.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/model/Professeur.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/metier/Service.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/model/Classe.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/vconnexion.fxml</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/dao/IDao.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/Gestionetudiant.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/VconnexionController.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/dao/DaoMySql.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/model/Details.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/VprofesseurController.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/dao/DaoPersonne.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/model/Personne.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/model/Etudiant.java</file>
+            <file>file:/C:/Users/Mariama%20Ba/Documents/NetBeansProjects/gestionetudiant-20210118T142706Z-001/gestionetudiant/src/gestionetudiant/VattribuerclasseController.java</file>
+        </group>
+    </open-files>
+</project-private>

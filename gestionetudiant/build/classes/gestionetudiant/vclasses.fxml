@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="423.0" prefWidth="677.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestionetudiant.ClasseController">
+   <children>
+      <Pane layoutX="16.0" layoutY="24.0" prefHeight="118.0" prefWidth="647.0">
+         <children>
+            <Text layoutX="169.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FORMULAIRE DE CREATION DE CLASSE">
+               <font>
+                  <Font name="Century Gothic Bold" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="txtLibelle" layoutX="64.0" layoutY="47.0" />
+            <TextField fx:id="txtNbreEtudiant" layoutX="432.0" layoutY="47.0" />
+            <Text layoutX="22.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libelle" />
+            <Text layoutX="336.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nbre etudiants" />
+            <Button layoutX="581.0" layoutY="79.0" mnemonicParsing="false" onAction="#handleCreerClasse" text="Ajouter" />
+         </children>
+      </Pane>
+      <ScrollPane layoutX="28.0" layoutY="165.0" prefHeight="216.0" prefWidth="260.0" style="-fx-background-color: writte;">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" onMouseClicked="#handleShowEtudiant" prefHeight="218.0" prefWidth="248.0" style="-fx-background-color: pink;">
+               <children>
+                  <Text layoutX="74.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des classes">
+                     <font>
+                        <Font name="Century Gothic Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <TableView fx:id="tblvClasse" layoutX="3.0" layoutY="33.0" prefHeight="167.0" prefWidth="243.0">
+                    <columns>
+                      <TableColumn fx:id="tblcId" prefWidth="75.0" text="Id" />
+                      <TableColumn fx:id="tblcLibelle" prefWidth="81.66665649414062" text="Libelle" />
+                        <TableColumn fx:id="tblcNbreEtudiant" prefWidth="85.33334350585938" text="Nbre etudiant" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <ScrollPane layoutX="339.0" layoutY="165.0" prefHeight="216.0" prefWidth="260.0" style="-fx-background-color: writte;">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="218.0" prefWidth="248.0" style="-fx-background-color: pink;">
+               <children>
+                  <Text layoutX="74.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des etudiants">
+                     <font>
+                        <Font name="Century Gothic Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <TableView fx:id="tblvEtudiant" layoutX="3.0" layoutY="33.0" prefHeight="167.0" prefWidth="243.0">
+                     <columns>
+                        <TableColumn fx:id="tblcEtuId" prefWidth="75.0" text="Id" />
+                        <TableColumn fx:id="tblcNomPrenom" prefWidth="81.66665649414062" text="Nom Prenom" />
+                        <TableColumn fx:id="tblcTuteur" prefWidth="85.33334350585938" text="Tuteur" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
