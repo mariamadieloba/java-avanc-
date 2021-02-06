@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gestion_etudiantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="classe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nbre_etudiant" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="details" Relationship="Self.FK_details_classe" FromRole="classe" ToRole="details" />
+    <NavigationProperty Name="personne" Relationship="Self.FK_personne_classe" FromRole="classe" ToRole="personne" />
+  </EntityType>
+  <EntityType Name="personne">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom_complet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tuteur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="modules" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="matricule" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="classe_id" Type="Int32" />
+    <NavigationProperty Name="classe" Relationship="Self.FK_personne_classe" FromRole="personne" ToRole="classe" />
+    <NavigationProperty Name="details" Relationship="Self.FK_details_personne" FromRole="personne" ToRole="details" />
+  </EntityType>
+  <EntityType Name="details">
+    <Key>
+      <PropertyRef Name="modules" />
+      <PropertyRef Name="annee" />
+      <PropertyRef Name="classe_id" />
+      <PropertyRef Name="professeur_id" />
+    </Key>
+    <Property Name="modules" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="annee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="classe_id" Type="Int32" Nullable="false" />
+    <Property Name="professeur_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="classe" Relationship="Self.FK_details_classe" FromRole="details" ToRole="classe" />
+    <NavigationProperty Name="personne" Relationship="Self.FK_details_personne" FromRole="details" ToRole="personne" />
+  </EntityType>
+  <Association Name="FK_details_classe">
+    <End Role="classe" Type="Self.classe" Multiplicity="1" />
+    <End Role="details" Type="Self.details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="classe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="details">
+        <PropertyRef Name="classe_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_personne_classe">
+    <End Role="classe" Type="Self.classe" Multiplicity="0..1" />
+    <End Role="personne" Type="Self.personne" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="classe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="personne">
+        <PropertyRef Name="classe_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_details_personne">
+    <End Role="personne" Type="Self.personne" Multiplicity="1" />
+    <End Role="details" Type="Self.details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personne">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="details">
+        <PropertyRef Name="professeur_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gestion_etudiantEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="classe" EntityType="Self.classe" />
+    <EntitySet Name="personne" EntityType="Self.personne" />
+    <EntitySet Name="details" EntityType="Self.details" />
+    <AssociationSet Name="FK_details_classe" Association="Self.FK_details_classe">
+      <End Role="classe" EntitySet="classe" />
+      <End Role="details" EntitySet="details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_personne_classe" Association="Self.FK_personne_classe">
+      <End Role="classe" EntitySet="classe" />
+      <End Role="personne" EntitySet="personne" />
+    </AssociationSet>
+    <AssociationSet Name="FK_details_personne" Association="Self.FK_details_personne">
+      <End Role="personne" EntitySet="personne" />
+      <End Role="details" EntitySet="details" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

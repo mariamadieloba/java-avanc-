@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gestion_etudiantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="classe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nbre_etudiant" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'gestion_etudiant.gestion_schema.details' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="details">
+          <Key>
+            <PropertyRef Name="modules" />
+            <PropertyRef Name="annee" />
+            <PropertyRef Name="classe_id" />
+            <PropertyRef Name="professeur_id" />
+          </Key>
+          <Property Name="modules" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="annee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="classe_id" Type="int" Nullable="false" />
+          <Property Name="professeur_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="personne">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_complet" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" />
+          <Property Name="pwd" Type="nvarchar" MaxLength="50" />
+          <Property Name="tuteur" Type="nvarchar" MaxLength="50" />
+          <Property Name="grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="modules" Type="text" />
+          <Property Name="matricule" Type="nvarchar" MaxLength="50" />
+          <Property Name="classe_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_details_classe">
+          <End Role="classe" Type="Self.classe" Multiplicity="1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="classe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_details_personne">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="professeur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personne_classe">
+          <End Role="classe" Type="Self.classe" Multiplicity="0..1" />
+          <End Role="personne" Type="Self.personne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="personne">
+              <PropertyRef Name="classe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestion_etudiantModelStoreContainer">
+          <EntitySet Name="classe" EntityType="Self.classe" Schema="gestion_schema" store:Type="Tables" />
+          <EntitySet Name="personne" EntityType="Self.personne" Schema="gestion_schema" store:Type="Tables" />
+          <EntitySet Name="details" EntityType="Self.details" store:Type="Tables" store:Schema="gestion_schema">
+            <DefiningQuery>SELECT 
+    [details].[modules] AS [modules], 
+    [details].[annee] AS [annee], 
+    [details].[classe_id] AS [classe_id], 
+    [details].[professeur_id] AS [professeur_id]
+    FROM [gestion_schema].[details] AS [details]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_details_classe" Association="Self.FK_details_classe">
+            <End Role="classe" EntitySet="classe" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_details_personne" Association="Self.FK_details_personne">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personne_classe" Association="Self.FK_personne_classe">
+            <End Role="classe" EntitySet="classe" />
+            <End Role="personne" EntitySet="personne" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gestion_etudiantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="classe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nbre_etudiant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="details" Relationship="Self.FK_details_classe" FromRole="classe" ToRole="details" />
+          <NavigationProperty Name="personne" Relationship="Self.FK_personne_classe" FromRole="classe" ToRole="personne" />
+        </EntityType>
+        <EntityType Name="personne">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_complet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tuteur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="grade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modules" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="matricule" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="classe_id" Type="Int32" />
+          <NavigationProperty Name="classe" Relationship="Self.FK_personne_classe" FromRole="personne" ToRole="classe" />
+          <NavigationProperty Name="details" Relationship="Self.FK_details_personne" FromRole="personne" ToRole="details" />
+        </EntityType>
+        <EntityType Name="details">
+          <Key>
+            <PropertyRef Name="modules" />
+            <PropertyRef Name="annee" />
+            <PropertyRef Name="classe_id" />
+            <PropertyRef Name="professeur_id" />
+          </Key>
+          <Property Name="modules" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="annee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="classe_id" Type="Int32" Nullable="false" />
+          <Property Name="professeur_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="classe" Relationship="Self.FK_details_classe" FromRole="details" ToRole="classe" />
+          <NavigationProperty Name="personne" Relationship="Self.FK_details_personne" FromRole="details" ToRole="personne" />
+        </EntityType>
+        <Association Name="FK_details_classe">
+          <End Role="classe" Type="Self.classe" Multiplicity="1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="classe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_personne_classe">
+          <End Role="classe" Type="Self.classe" Multiplicity="0..1" />
+          <End Role="personne" Type="Self.personne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="personne">
+              <PropertyRef Name="classe_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_details_personne">
+          <End Role="personne" Type="Self.personne" Multiplicity="1" />
+          <End Role="details" Type="Self.details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personne">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="details">
+              <PropertyRef Name="professeur_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestion_etudiantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="classe" EntityType="Self.classe" />
+          <EntitySet Name="personne" EntityType="Self.personne" />
+          <EntitySet Name="details" EntityType="Self.details" />
+          <AssociationSet Name="FK_details_classe" Association="Self.FK_details_classe">
+            <End Role="classe" EntitySet="classe" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_personne_classe" Association="Self.FK_personne_classe">
+            <End Role="classe" EntitySet="classe" />
+            <End Role="personne" EntitySet="personne" />
+          </AssociationSet>
+          <AssociationSet Name="FK_details_personne" Association="Self.FK_details_personne">
+            <End Role="personne" EntitySet="personne" />
+            <End Role="details" EntitySet="details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gestion_etudiantModelStoreContainer" CdmEntityContainer="gestion_etudiantEntities">
+          <EntitySetMapping Name="classe">
+            <EntityTypeMapping TypeName="gestion_etudiantModel.classe">
+              <MappingFragment StoreEntitySet="classe">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+                <ScalarProperty Name="nbre_etudiant" ColumnName="nbre_etudiant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personne">
+            <EntityTypeMapping TypeName="gestion_etudiantModel.personne">
+              <MappingFragment StoreEntitySet="personne">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nom_complet" ColumnName="nom_complet" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="tuteur" ColumnName="tuteur" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="modules" ColumnName="modules" />
+                <ScalarProperty Name="matricule" ColumnName="matricule" />
+                <ScalarProperty Name="classe_id" ColumnName="classe_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="details">
+            <EntityTypeMapping TypeName="gestion_etudiantModel.details">
+              <MappingFragment StoreEntitySet="details">
+                <ScalarProperty Name="modules" ColumnName="modules" />
+                <ScalarProperty Name="annee" ColumnName="annee" />
+                <ScalarProperty Name="classe_id" ColumnName="classe_id" />
+                <ScalarProperty Name="professeur_id" ColumnName="professeur_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

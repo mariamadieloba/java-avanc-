@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gestion_etudiantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="classe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="nbre_etudiant" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'gestion_etudiant.gestion_schema.details' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="details">
+    <Key>
+      <PropertyRef Name="modules" />
+      <PropertyRef Name="annee" />
+      <PropertyRef Name="classe_id" />
+      <PropertyRef Name="professeur_id" />
+    </Key>
+    <Property Name="modules" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="annee" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="classe_id" Type="int" Nullable="false" />
+    <Property Name="professeur_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="personne">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom_complet" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="nvarchar" MaxLength="50" />
+    <Property Name="pwd" Type="nvarchar" MaxLength="50" />
+    <Property Name="tuteur" Type="nvarchar" MaxLength="50" />
+    <Property Name="grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="modules" Type="text" />
+    <Property Name="matricule" Type="nvarchar" MaxLength="50" />
+    <Property Name="classe_id" Type="int" />
+  </EntityType>
+  <Association Name="FK_details_classe">
+    <End Role="classe" Type="Self.classe" Multiplicity="1" />
+    <End Role="details" Type="Self.details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="classe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="details">
+        <PropertyRef Name="classe_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_details_personne">
+    <End Role="personne" Type="Self.personne" Multiplicity="1" />
+    <End Role="details" Type="Self.details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personne">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="details">
+        <PropertyRef Name="professeur_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_personne_classe">
+    <End Role="classe" Type="Self.classe" Multiplicity="0..1" />
+    <End Role="personne" Type="Self.personne" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="classe">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="personne">
+        <PropertyRef Name="classe_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="gestion_etudiantModelStoreContainer">
+    <EntitySet Name="classe" EntityType="Self.classe" Schema="gestion_schema" store:Type="Tables" />
+    <EntitySet Name="personne" EntityType="Self.personne" Schema="gestion_schema" store:Type="Tables" />
+    <EntitySet Name="details" EntityType="Self.details" store:Type="Tables" store:Schema="gestion_schema">
+      <DefiningQuery>SELECT 
+    [details].[modules] AS [modules], 
+    [details].[annee] AS [annee], 
+    [details].[classe_id] AS [classe_id], 
+    [details].[professeur_id] AS [professeur_id]
+    FROM [gestion_schema].[details] AS [details]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_details_classe" Association="Self.FK_details_classe">
+      <End Role="classe" EntitySet="classe" />
+      <End Role="details" EntitySet="details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_details_personne" Association="Self.FK_details_personne">
+      <End Role="personne" EntitySet="personne" />
+      <End Role="details" EntitySet="details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_personne_classe" Association="Self.FK_personne_classe">
+      <End Role="classe" EntitySet="classe" />
+      <End Role="personne" EntitySet="personne" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
